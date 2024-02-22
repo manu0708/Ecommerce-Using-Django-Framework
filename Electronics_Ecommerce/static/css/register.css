@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #eff0f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: auto;
+}
+
+.container {
+    position: relative;
+    margin: 120px;
+    width: 500px;
+    height: 100%;
+    background-color: #eff0f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 780px;
+    height: 430px;
+    gap: 20px;
+    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05), 25px 35px 20px rgba(0, 0, 0, 0.05), 25px 30px 30px rgba(0, 0, 0, 0.05), inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+    border-radius: 65% 35% 28% 72% / 37% 50% 50% 63%;
+    transition: 0.5s;
+}
+
+
+/* .container form::before {
+    content: "";
+    position: absolute;
+    left: 60px;
+    top: 60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 20% 80% 35% 65% / 0% 54% 46% 100%;
+    background-color: rgba(255, 255, 255, 0.259);
+    opacity: 0.8;
+} */
+
+.container form:hover {
+    border-radius: 50%;
+}
+
+.container form h2 {
+    position: relative;
+    top: -10px;
+}
+
+.container form .inputbox {
+    width: 60%;
+    position: relative;
+    border-radius: 25px;
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1), inset -2px -5px 10px rgba(255, 255, 255, 1), 15px 15px 10px rgba(0, 0, 0, 0.05), 15px 10px 15px rgba(0, 0, 0, 0.025);
+}
+
+.container form .inputbox::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65%;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+}
+
+.container form .inputbox input {
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: 25px;
+    font-size: 1rem;
+    padding: 10px 15px;
+}
+
+.container form input[type="Submit"] {
+    color: #eff0f4;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 15px 30px;
+    text-align: center;
+}
+
+.container form .inputbox:last-child::before {
+    background-color: transparent;
+}
+
+.container form .inputbox:last-child {
+    width: 160px;
+    background-color: rgba(232, 12, 12, 0.947);
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1), 15px 15px 10px rgba(0, 0, 0, 0.05), 15px 10px 15px rgba(0, 0, 0, 0.025);
+    transition: 0.3s;
+}
+
+.container form .inputbox:last-child:hover {
+    width: 200px;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    height: 350px;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.sign {
+    position: absolute;
+    background-color: rgba(138, 35, 233, 0.873);
+    top: 20px;
+    left: 20px;
+    height: 130px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 70% 30% 80% 20% / 62% 54% 46% 38%;
+    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05), 25px 35px 20px rgba(0, 0, 0, 0.05), 25px 30px 30px rgba(0, 0, 0, 0.05), inset -20px -20px 25px rgba(231, 227, 227, 0.862);
+    border-radius: 65% 35% 28% 72% / 37% 50% 50% 63%;
+    transition: 1s;
+}
+
+.sign:hover {
+    border-radius: 50%;
+}
+
+.sign a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #eff0f4;
+}
+
+.forgot {
+    position: absolute;
+    background-color: rgba(192, 12, 215, 0.873);
+    top: 190px;
+    left: 0px;
+    height: 130px;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 76% 24% 63% 37% / 53% 46% 54% 47%;
+    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05), 25px 35px 20px rgba(0, 0, 0, 0.05), 25px 30px 30px rgba(0, 0, 0, 0.05), inset -20px -20px 25px rgba(231, 227, 227, 0.862);
+    transition: 1s;
+}
+
+.forgot:hover {
+    border-radius: 50%;
+}
+
+.forgot a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #eff0f4;
+}

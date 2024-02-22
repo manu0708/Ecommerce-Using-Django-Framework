@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css">
+
+</head>
+<body>
+    {% comment %} <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        current_location = window.location;
+        {% comment %} alert('{{ message }}'); {% endcomment %}
+        swal.fire("{{ message }}", "{{ suggestion }}", "{{ mestype }}").then(function (){
+            {% if type == 'login' %}
+            window.location.replace('http://127.0.0.1:8000/login/')
+            {% elif type == 'home' %}
+            window.location.replace('http://127.0.0.1:8000/')
+            {% elif type == 'prod_det' %}
+            window.location.replace('http://127.0.0.1:8000/product/{{ locs }}')
+            {% else %}
+            window.location.replace(current_location);
+            {% endif %}
+        })
+    </script>
+</body>
+</html>

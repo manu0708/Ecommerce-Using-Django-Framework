@@ -1,0 +1,475 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit';
+}
+
+.firstrow {
+    margin: 20px;
+}
+
+.firstrow .col-md-6 .custom_fixed {
+    position: sticky;
+    top: 90px;
+}
+
+.firstrow .col-md-6 .custom_fixed .row .side_img {
+    position: relative;
+    left: -20px;
+}
+
+.firstrow .col-md-6 .custom_fixed .row .col-md-2 img {
+    height: 60px;
+    width: 60px;
+    margin-top: 20px;
+    border: 1px solid blue;
+}
+
+.firstrow .col-md-6 .custom_fixed .row .col-md-10 .big_image {
+    box-shadow: 1px -1px 14px -6px rgba(115, 107, 107, 0.75) inset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 410px;
+    position: relative;
+    left: -50px;
+}
+
+.firstrow .col-md-6 .custom_fixed .row .col-md-10 .big_image img {
+    margin-top: 20px;
+    height: 400px;
+    width: 450px;
+    transition: 1s;
+}
+
+.firstrow .col-md-6 .custom_fixed .row .col-md-10 .big_image img:hover{
+    cursor: pointer;
+}
+
+.firstrow .detail {
+    position: relative;
+    left: -60px;
+}
+
+.firstrow .col-md-6 .custom_fixed .row .col-md-2 img:hover {
+    cursor: pointer;
+}
+
+.firstrow .detail h3 {
+    color: blue;
+    font-size: 25px;
+    font-family: 'Kanit';
+}
+
+.firstrow .detail h4 {
+    font-size: 20px;
+    font-family: 'Kanit';
+    color: rgb(178, 20, 235);
+}
+
+.firstrow .detail h5 {
+    font-size: 16px;
+    color: brown;
+    font-family: 'Kanit';
+}
+
+.firstrow .detail h6 {
+    color: rgb(16, 227, 16);
+    font-size: 25px;
+    font-family: 'Kanit';
+}
+
+.path {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    height: 50px;
+    font-size: 20px;
+    color: #fff;
+    background-color: chocolate;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+hr {
+    opacity: 15%;
+}
+
+#sell {
+    color: rgb(151, 146, 146);
+    text-decoration: line-through;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+#discount {
+    color: red;
+    font-size: 18px;
+}
+
+#discount img {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.detail .priceor .offer {
+    margin-left: 5px;
+}
+
+.detail .mrp {
+    opacity: 65%;
+    font-size: 18px;
+}
+
+.detail .priceor {
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.detail .addtocart {
+    border: none;
+    outline: none;
+    background-color: #288BA8;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 30px;
+    border: 2px solid #288BA8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: 1s;
+    z-index: 1;
+}
+
+.detail .addtocart a {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Kanit';
+    transition: 1s;
+}
+
+.detail .addtocart ion-icon {
+    font-size: 25px;
+}
+
+.detail .addtocart::before {
+    content: '';
+    width: 100%;
+    height: 0%;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    transition: 1s;
+    z-index: -1;
+}
+
+.detail .addtocart:hover::before {
+    height: 180%;
+}
+
+.detail .addtocart:hover {
+    color: #288BA8;
+}
+
+.detail .addtocart:hover a {
+    color: #288BA8;
+}
+
+.detail p{
+    font-family: 'Kanit';
+}
+
+.detail .feauture_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    border: none;
+    outline: none;
+    padding: 10px 0;
+}
+
+.detail .feauture_list li {
+    list-style: none;
+}
+
+.detail .feauture_list li img {
+    width: 80px;
+    height: 80px;
+}
+
+.detail .feauture_list1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
+    color: blue;
+    margin-top: -16px;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+}
+
+.detail .feauture_list1 li {
+    list-style: none;
+}
+
+.buynow {
+    width: 60%;
+    height: 60px;
+    background-color: orangered;
+    border: none;
+    outline: none;
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 17%;
+    top: 10px;
+    color: #fff;
+    border-radius: 10px;
+    border: 2px solid orangered;
+    overflow: hidden;
+    z-index: 1;
+    transition: 1s;
+}
+
+.buynow::before {
+    content: '';
+    width: 100%;
+    height: 0%;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    transition: 1s;
+    z-index: -1;
+}
+
+.buynow:hover::before {
+    height: 180%;
+}
+
+.buynow:hover {
+    color: orangered;
+}
+
+.ratings h5 {
+    color: rgb(120, 109, 109);
+    font-size: 25px;
+    font-family: 'Kanit';
+}
+
+.ratings .containers {
+    width: 400px;
+    padding: 20px 0;
+    margin-left: -50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ratings .containers p {
+    margin-left: -140px;
+    font-family: 'Kanit';
+}
+
+.ratings .containers .star_rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+    border: none;
+    outline: none;
+}
+
+.ratings .containers .star_rating input {
+    display: none;
+}
+
+.ratings .containers .star_rating label {
+    font-size: 35px;
+    color: #bcc0c2;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.star_rating input:not(:checked)~label:hover,
+.star_rating input:not(:checked)~label:hover~label {
+    color: orange;
+}
+
+.ratings .containers .star_rating input:checked~label {
+    color: orange;
+}
+
+.ratings .containers .star_rating input#rate-5:checked~label {
+    color: #fe7;
+    text-shadow: 0 0 10px rgba(231, 210, 114, 0.806);
+}
+
+.firstrow .detail form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.firstrow .detail form textarea {
+    width: 80%;
+    height: 160px;
+    border: 2px solid blue;
+    position: relative;
+    left: -10px;
+    outline: none;
+    padding: 2px 5px;
+    background-color: #e9e1e1a0;
+    border-radius: 15px;
+    font-family: 'Kanit';
+}
+
+.firstrow .detail form .post {
+    position: relative;
+    top: -50px;
+}
+
+.firstrow .detail form #ratetext {
+    display: none;
+}
+
+#size_product {
+    padding: 7px 15px;
+    border: 2px solid violet;
+    margin-left: 10px;
+}
+
+.row {
+    display: flex;
+}
+
+.card .row img {
+    width: 90px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.card .row .names {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.card .row .names #date-time {
+    position: absolute;
+    right: -380px;
+    width: auto;
+    font-size: 10px;
+    color: blue;
+}
+
+.card .row .names #username {
+    color: blue;
+}
+
+.checked {
+    color: orange;
+}
+
+.comment {
+    font-size: 14px;
+    font-family: 'Kanit';
+    text-indent: 80px;
+    color: brown;
+}
+
+.ratings .card {
+    border: none;
+    outline: none;
+}
+
+.ratings .card .row .col-md-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ratings .card .row .col-md-3 .avg_rate {
+    font-size: 30px;
+    color: rgb(8, 162, 8);
+}
+
+.ratings .card .row .col-md-1 .num {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 200;
+}
+
+.ratings .card .row .col-md-6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ratings .card .row .col-md-6 .progress {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.ratings .card .row .col-md-1 .per_avg {
+    font-size: 14px;
+    margin-top: 10.5px;
+    margin-bottom: -6px;
+    font-weight: 600;
+    margin-left: -16px;
+}
+
+.ratings .card .row .col-md-1 #five {
+    color: rgb(0, 128, 0);
+}
+
+.ratings .card .row .col-md-1 #four {
+    color: rgb(25, 135, 84);
+}
+
+.ratings .card .row .col-md-1 #three {
+    color: rgb(13, 202, 240);
+}
+
+.ratings .card .row .col-md-1 #two {
+    color: rgb(253, 191, 7);
+}
+
+.ratings .card .row .col-md-1 #one {
+    color: rgb(217, 52, 68);
+}
+
+.ratings .card .row #no_of_rev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ratings .card .row #no_of_rev .avg_review {
+    font-size: 30px;
+    color: blue;
+}
+
+.ratings .card .row #no_of_rev .avg_review_name {
+    font-size: 16px;
+    color: #288BA8;
+}

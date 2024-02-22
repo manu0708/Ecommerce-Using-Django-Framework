@@ -1,0 +1,378 @@
+#car_image {
+    width: 70px;
+    height: 70px;
+    margin-right: 5px;
+}
+
+.container {
+    margin-top: 110px;
+    margin-bottom: 30px;
+}
+
+.container .table thead {
+    text-align: center;
+}
+
+.container .table tbody tr .data {
+    text-align: center;
+    position: relative;
+}
+
+.container .table tbody tr td #prod_link {
+    text-decoration: none;
+    color: #68b398;
+}
+
+.container .table tbody tr td #prod_link:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+#rem {
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
+    transition: 1s;
+}
+
+#rem:hover {
+    color: blue;
+    transform: rotateY(360deg);
+}
+
+#tot span {
+    display: flex;
+    justify-content: right;
+    position: relative;
+    right: 120px;
+    font-size: 20px;
+}
+
+tbody tr #prod {
+    display: flex;
+}
+
+#form1 {
+    width: 45px;
+    text-align: center;
+}
+
+.data .d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.data .d-flex a {
+    text-decoration: none;
+}
+
+.data .d-flex .btn {
+    font-size: 14px;
+    width: 40px;
+    height: 36px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checked {
+    color: orange;
+}
+
+.stars .sr {
+    padding: 3px 8px;
+    background-color: green;
+    color: #fff;
+    border-radius: 10px;
+    gap: 3px;
+}
+
+.stars .review_count {
+    font-weight: 600;
+    margin-left: 10px;
+    opacity: 70%;
+    color: #000;
+}
+
+.stars .sr .f-s {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.stars .sr .fs {
+    font-size: 8px;
+    margin-left: 5px;
+}
+
+.no-reviews {
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+#sell_price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    color: darkblue;
+}
+
+#tot_price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    color: darkblue;
+}
+
+#rem {
+    margin-top: 22px;
+}
+
+
+/* addtocart page design(2) start */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+*{
+
+	font-family: 'Comfortaa', cursive;
+
+	margin: 0;
+
+	padding: 0;
+
+	box-sizing: border-box;
+
+}
+
+.container{
+
+	max-width: 1200px;
+
+	margin: 0 auto;
+
+}
+
+.container > h1{
+
+	padding: 20px 0;
+
+}
+
+.cart{
+
+	display: flex;
+
+}
+
+.products{
+
+	flex: 0.75;
+
+}
+
+.product{
+
+	display: flex;
+
+	width: 100%;
+
+	overflow: hidden;
+
+    outline: none;
+
+    border: none;
+
+	margin-bottom: 20px;
+
+    box-shadow: rgba(99, 99, 99, 0.315) 0px 2px 8px 0px;
+
+}
+
+/* .product:hover{
+
+	border: none;
+
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+
+	transform: scale(1.01);
+
+} */
+
+.product > img{
+
+	width: 300px;
+
+	height: 200px;
+
+	object-fit: cover;
+
+}
+
+.product > img:hover{
+
+	transform: scale(1.04);
+
+}
+
+.product-info{
+
+	padding: 20px;
+
+	width: 100%;
+
+	position: relative;
+
+}
+
+.product-name, .product-price, .product-offer{
+
+	margin-bottom: 20px;
+
+}
+
+.product-remove{
+
+	position: absolute;
+
+	bottom: 20px;
+
+	right: 20px;
+
+	color: white;
+
+	cursor: pointer;
+
+	border-radius: 5px;
+
+}
+
+.fa{
+
+	margin-right: 5px;
+
+}
+
+.cart-total{
+
+	flex: 0.25;
+
+	margin-left: 20px;
+
+	padding: 20px;
+
+    height: 300px;
+
+    box-shadow: rgba(99, 99, 99, 0.521) 0px 2px 8px 0px;
+    
+	border-radius: 5px;
+
+    position: sticky;
+
+    top: 160px;
+
+}
+
+.cart-total p{
+
+	display: flex;
+
+	justify-content: space-between;
+
+	margin-bottom: 30px;
+
+	font-size: 20px;
+
+}
+
+.cart-total a{
+
+	display: block;
+
+	text-align: center;
+
+	height: 40px;
+
+	line-height: 40px;
+
+	background-color: tomato;
+
+	color: white;
+
+	text-decoration: none;
+
+}
+
+.cart-total a:hover{
+
+	background-color: red;
+
+}
+
+@media screen and (max-width: 700px){
+
+	.remove{
+
+		display: none;
+
+	}
+
+	.product{
+
+		height: auto;
+
+	}
+
+	.product > img{
+
+		height: auto;
+
+		width: 200px;
+
+	}
+
+	.product-name, .product-price, .product-offer{
+
+		margin-bottom: 10px;
+
+	}
+
+}
+
+@media screen and (max-width: 900px){
+
+	.cart{
+
+		flex-direction: column;
+
+	}
+
+	.cart-total{
+
+		margin-left: 0;
+
+		margin-bottom: 20px;
+
+	}
+
+}
+
+@media screen and (max-width: 1220px){
+
+	.container{
+
+		max-width: 95%;
+
+	}
+
+}
+
+
+
+
+

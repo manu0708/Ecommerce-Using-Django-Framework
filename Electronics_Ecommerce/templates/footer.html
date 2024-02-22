@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>       
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+<body>    
+    <footer class="footer">
+    <div class="container">
+            <div class="footer__about">
+                <div class="footer__logo">
+                    <a href="index-2.html"><img src="{% static 'images/logo-redhat-1050x1050-removebg-preview.png' %}" alt=""></a>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt cilisis.
+                </p>
+                <div class="footer__payment">
+                    <a href="#"><img src="{% static 'images/payment/payment-1.png' %}" alt="" class="footer_pay_logo"></a>
+                    <a href="#"><img src="{% static 'images/payment/payment-2.png' %}" alt="" class="footer_pay_logo"></a>
+                    <a href="#"><img src="{% static 'images/payment/payment-3.png' %}" alt="" class="footer_pay_logo"></a>
+                    <a href="#"><img src="{% static 'images/payment/payment-4.png' %}" alt="" class="footer_pay_logo"></a>
+                    <a href="#"><img src="{% static 'images/payment/payment-5.png' %}" alt="" class="footer_pay_logo"></a>
+                </div>
+            </div>
+            <div class="footer__widgets">
+                <h6>Quick links</h6>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blogs</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer__widgets">
+                <h6>Account</h6>
+                <ul>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Orders Tracking</a></li>
+                    <li><a href="#">Checkout</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                </ul>
+            </div>
+            <div class="footer__newslatter">
+                <h6>NEWSLETTER</h6>
+                <form action="#">
+                    <input type="email" placeholder="Email">
+                    <input type="submit" value="Subscribe">
+                </form>
+                <div class="footer__copyright__text">
+                    <p>Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This website is designed by Manu <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://instagram.com/_dj_manu_" target="_blank">Colorlib</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer__social">
+            <div class="heading">
+                <h6>Contact Us</h6>
+            </div>
+            <div class="logo">
+                <a href="https://www.facebook.com/manoj.sking.1"><ion-icon name="logo-facebook"></ion-icon></i></a>
+                <a href=""><ion-icon name="logo-twitter"></ion-icon></i></a>
+                <a href="https://www.youtube.com/channel/UCb2D-eE8VKv4-V7H3klE0gw"><ion-icon name="logo-youtube"></ion-icon></i></a>
+                <a href="https://www.instagram.com/_dj_manu_/"><ion-icon name="logo-instagram"></ion-icon></i></a>
+            </div> 
+        </div>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

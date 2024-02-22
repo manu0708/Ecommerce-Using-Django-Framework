@@ -1,0 +1,462 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ecommerce</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <style>
+        :root{
+            --white-light: rgba(255, 255, 255, 0.5);
+            --alice-blue: #f8f9fa;
+            --carribean-green: #40c9a2;
+            --gray: #ededed;
+        }
+        
+        .checked{
+            color: orange;
+        }
+
+        h4 a:hover{
+            color: pink;
+        }
+
+        .banner__pic1, i, h6, p{
+            transition: 0.8s;
+        }
+
+        .banner__pic1:hover{
+            background-color: #B2AFAF!important;
+        }
+
+        .banner__pic1:hover i{
+            color: rgba(0, 0, 255, 0.411)!important;
+        }
+
+        .banner__pic1:hover h6{
+            color: rgba(0, 0, 255, 0.411)!important;
+        }
+
+        .banner__pic1:hover p{
+            color:rgb(133, 125, 125)!important;
+        }
+
+        .alertify-notifier .ajs-message.ajs-success{
+            color:color;
+            background-color:black;
+        }
+        .sm-title{
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .off-info .sm-title{
+            background: var(--carribean-green);
+            color: white;
+            display: inline-block;
+            padding: 0.5rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            z-index: 1;
+            letter-spacing: 3px;
+            cursor: pointer;
+        }
+
+        h2{
+            line-height: 1.2;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+    </style>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    {% include "top-navbar.html" %}
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    <!-- image slider start -->
+    <div class="image-slider" style="margin-top:47px;">
+        <div class="images">
+            {% for img in image_sliders %}
+                <img src="{{ img.slider_image.url }}" alt="" id="img{{ forloop.counter }}" class="img_tag" />
+                <span class="slide-title" style="position:absolute; top:30%; left:15%; color:#fff; font-size:60px; width:540px; font-weight:600; z-index:999;">{{ img.slider_text }}</span><br>
+                <button class="btn btn-primary" style="position:absolute; top:75%; left:15%; color:#fff; font-weight:600; ">Shop Now</button>
+            {% endfor %}
+        </div>
+
+        <div class="radio-buttons">
+            {% for r in image_sliders %}
+          <span onclick="radio_index({{ forloop.counter }})" class="span_tag"></span>
+          {% endfor %}
+        </div>
+  
+        <div class="shift-buttons">
+          <span class="shift_button" id="left" onclick="slide_index(-1)"
+            ><ion-icon name="chevron-back-outline"></ion-icon>
+          </span>
+          <span class="shift_button" id="right" onclick="slide_index(1)"
+            ><ion-icon name="chevron-forward-outline"></ion-icon
+          ></span>
+        </div>
+      </div>
+
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="section-title">
+            <h2>All Categories</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    {% for i in categorys %}
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="/media/images/{{ i.category_image }}" style="height: 270px;">
+                            <h5><a href="{% url 'crt' i.encrypt_key %}">{{ i.category_name }}</a></h5>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Section End -->
+
+    <br>
+
+    <!-- Banner Begin -->
+    <div class="banner" style="margin-top: 30px; margin-bottom:30px;">
+        <div class="container">
+            <div class="row" style="display: flex; flex-wrap: wrap;">
+                <div class="col-lg-4 col-md-4 col-sm-4" style="display: flex; justify-content: center; align-items:center; min-width: 300px; min-height: 300px;">
+                    <div class="banner__pic1" style="background-color:blue; padding:20px 30px; width:100%; height:100%; display: flex; justify-content: center; align-items:center; flex-direction: column; border-radius:10px;">
+                        <i class="fa-solid fa-truck fa-shake" style="font-size: 60px; color:#fff;"></i>
+                        <h6 style="font-family:'Kanit'; font-size:20px; color:#fff;">Free Delivery</h6><br>
+                        <p style="font-size:18px; color: #fff; font-family:'Kanit';">Free Delivery on the product detail page that is fulfilled and shipped by Amazon is eligible and contributes to your free shipping order minimum</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4" style="display: flex; justify-content: center; align-items:center; min-width: 300px; min-height: 300px;">
+                    <div class="banner__pic1" style="background-color:blue; padding:20px 30px; width:100%; height:100%; display: flex; justify-content: center; align-items:center; flex-direction: column; border-radius:10px;">
+                        <i class="fa-solid fa-wallet fa-shake" style="font-size: 60px; color:#fff;"></i>
+                        <h6 style="font-family:'Kanit'; font-size:20px; color:#fff;">Cash on Delivery</h6><br>
+                        <p style="font-size:18px; color: #fff; font-family:'Kanit';">You can pay in cash at the time of actual delivery of the product at your doorstep, without requiring you to make any advance payment online</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4" style="display: flex; justify-content: center; align-items:center;min-width: 300px; min-height: 300px;">
+                    <div class="banner__pic1" style="background-color:blue; padding:20px 30px; width:100%; height:100%; display: flex; justify-content: center; align-items:center; flex-direction: column; border-radius:10px;">
+                        <i class="fa-solid fa-arrow-rotate-left fa-shake" style="font-size: 60px; color:#fff;"></i>
+                        <h6 style="font-family:'Kanit'; font-size:20px; color:#fff;">Returnable</h6><br>
+                        <p style="font-size:18px; color: #fff; font-family:'Kanit';">The Rules retail merchants establish to manage the process by which customers return or exchange unwanted or defective merchandise that they have purchased previously</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+    <br>
+
+    <!-- Product with Categories start -->
+
+    {% for cat in main_categorys %}
+    <section class="categories">
+        <div class="section-title">
+            <h2>{{ cat.main_category_name }}</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    {% for i in cat.product_set.all %}
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="">
+                            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                                <div class="featured__item">
+                                    <div class="featured__item__pic set-bg" data-setbg="{{ i.product_image_first.url }}" style="background-size: 100%; width:210px;">
+                                        <ul class="featured__item__pic__hover">
+                                            <li><a href="{% url 'addtowishlist' i.products_id %}"><i class="fa fa-heart" onclick="color_change(this)"></i></a></li>
+                                            <li><a href="https://api.whatsapp.com/send?text=http://127.0.0.1:8000/{% url 'productdetail' i.product_slug %}" data-action="share/whatsapp/share"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="{% url 'addtocart' i.products_id i.product_slug %}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class = "off-info">
+                                        <h2 class = "sm-title">{{ i.product_discount }} off</h2>
+                                    </div>
+                                    <div class="featured__item__text m-2">
+                                        <h4><a href="{% url 'productdetail' i.product_slug %}" style="font-size:18px;">{{ i.products_name|truncatewords:"3" }}</a></h4>
+                                        <span style="font-weight:600;">{{ i.products_selling_price }}</span>
+                                        <br>
+                                        <span style="color: red; font-size: 16px;">{{ i.brand_id }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+
+    <!-- Product with Categories End -->
+
+    <!-- Featured Section Begin -->
+    <section class="categories">
+        <div class="section-title">
+            <h2>Featured Products</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    {% for i in featured_products %}
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="">
+                            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                                <div class="featured__item">
+                                    <div class="featured__item__pic set-bg" data-setbg="{{ i.product_image_first.url }}" style="background-size: 100%; width:210px;">
+                                        <ul class="featured__item__pic__hover">
+                                            <li><a href="{% url 'addtowishlist' i.products_id %}"><i class="fa fa-heart" onclick="color_change(this)"></i></a></li>
+                                            <li><a href="https://api.whatsapp.com/send?text=http://127.0.0.1:8000/{% url 'productdetail' i.product_slug %}"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="{% url 'addtocart' i.products_id i.product_slug %}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class = "off-info">
+                                        <h2 class = "sm-title">{{ i.product_discount }} off</h2>
+                                    </div>
+                                    <div class="featured__item__text m-2">
+                                        <h4><a href="{% url 'productdetail' i.product_slug %}" style="font-size:18px;">{{ i.products_name|truncatewords:"3" }}</a></h4>
+                                        <span style="font-weight:600;">{{ i.products_selling_price }}</span>
+                                        <br>
+                                        <span style="color: red; font-size: 16px;">{{ i.brand_id }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Featured Section End -->
+
+    <!-- Banner Begin -->
+    <div class="banner" style="margin-bottom:30px;">
+        <div class="section-title">
+            <h2>Best Sale</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="{% static 'images/banner-homepage1.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="{% static 'images/banner-homepage2.jpg' %}" alt="" style="height: 343px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+    <!-- Latest Product Section Begin -->
+    <section class="categories" style="margin-bottom:60px;">
+        <div class="section-title">
+            <h2>Latest Products</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    {% for i in latest_products %}
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="">
+                            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                                <div class="featured__item">
+                                    <div class="featured__item__pic set-bg" data-setbg="{{ i.product_image_first.url }}" style="background-size: 100%; width:210px;">
+                                        <ul class="featured__item__pic__hover">
+                                            <li><a href="{% url 'addtowishlist' i.products_id %}"><i class="fa fa-heart" onclick="color_change(this)"></i></a></li>
+                                            <li><a href="https://api.whatsapp.com/send?text=http://127.0.0.1:8000/{% url 'productdetail' i.product_slug %}"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="{% url 'addtocart' i.products_id i.product_slug %}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class = "off-info">
+                                        <h2 class = "sm-title">{{ i.product_discount }} off</h2>
+                                    </div>
+                                    <div class="featured__item__text m-2">
+                                        <h4><a href="{% url 'productdetail' i.product_slug %}" style="font-size:18px;">{{ i.products_name|truncatewords:"3" }}</a></h4>
+                                        <span style="font-weight:600;">{{ i.products_selling_price }}</span>
+                                        <br>
+                                        <span style="color: red; font-size: 16px;">{{ i.brand_id }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Latest Product Section End -->
+
+
+    <!-- Footer Section Begin -->
+    {% include 'footer.html' %}
+    <!-- Footer Section End -->
+
+    <!-- image slider start -->
+
+    <script>
+        var index_value = 0;
+  
+        showimage(index_value);
+  
+        function radio_index(i_v) {
+          index_value = i_v;
+          click_show_image(index_value);
+        }
+  
+        function slide_index(i_v) {
+          const img = document.getElementsByClassName("img_tag");
+          const span = document.getElementsByClassName("span_tag");
+          const slide_title = document.getElementsByClassName("slide-title");
+  
+          for (let i = 0; i < img.length; i++) {
+            img[i].style.display = "none";
+            span[i].style.background = "silver";
+            slide_title[i].style.display = "none";
+          }
+          if (i_v == 1) {
+            if (index_value >= img.length - 1) {
+              index_value = -1;
+            }
+            img[(index_value += 1)].style.display = "block";
+            slide_title[(index_value += 1)].style.display = "block";
+            span[index_value].style.background = "red";
+          }
+  
+          if (i_v == -1) {
+            if (index_value <= 0) {
+              index_value = img.length;
+            }
+            img[(index_value -= 1)].style.display = "block";
+            slide_title[(index_value -= 1)].style.display = "block";
+            span[index_value].style.background = "red";
+          }
+        }
+  
+        function showimage(i_v) {
+          const img = document.getElementsByClassName("img_tag");
+          const span = document.getElementsByClassName("span_tag");
+          const slide_title = document.getElementsByClassName("slide-title");
+  
+          for (let i = 0; i < img.length; i++) {
+            img[i].style.display = "none";
+            slide_title[i].style.display = "none";
+            span[i].style.background = "silver";
+          }
+          img[index_value].style.display = "block";
+          slide_title[index_value].style.display = "block";
+          span[index_value].style.background = "red";
+  
+          let t = setTimeout(() => {
+            if (index_value >= img.length - 1) {
+              index_value = 0;
+            } else {
+              index_value += 1;
+            }
+            showimage(index_value);
+          }, 3000);
+        }
+  
+        function click_show_image(i_v) {
+          const img = document.getElementsByClassName("img_tag");
+          const span = document.getElementsByClassName("span_tag");
+  
+          for (let i = 0; i < img.length; i++) {
+            img[i].style.display = "none";
+            span[i].style.background = "silver";
+          }
+  
+          img[index_value - 1].style.display = "block";
+          span[index_value - 1].style.background = "red";
+        }
+
+        function color_change(e){
+            if(e.style.color == "red"){
+                e.style.color = "black";
+            }
+            else{
+                e.style.color = "red";
+            }
+        }   
+
+      </script>
+      <!-- JavaScript -->
+      <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+      <script>
+        alertify.set('notifier','position', 'bottom-center');
+        {% for msg in messages %}
+        alertify.success('{{ msg }}');
+        {% endfor %}
+      </script>
+
+    <!-- image slider end -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

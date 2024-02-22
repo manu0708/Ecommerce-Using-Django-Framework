@@ -1,0 +1,58 @@
+{% if user.is_authenticated %}
+    <script>
+        window.location.replace('http://127.0.0.1:8000/');
+    </script>
+{% else %}
+<!-- header section top navigation bar start -->
+
+ {% include "top-navbar.html" %}
+
+ <!-- header section top navigation bar end -->
+ 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="{% static '/css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+   <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <h2>Sign Up</h2>
+            <div class="inputbox">
+                <input type="text" required placeholder="Username" name="Username" readonly onfocus="this.removeAttribute('readonly');">
+            </div>
+            <div class="inputbox">
+                <input type="email" required placeholder="Email" name="email" readonly onfocus="this.removeAttribute('readonly');">
+            </div>
+            <div class="inputbox">
+                <input type="password" required placeholder="Password" name="password">
+            </div>
+            <div class="inputbox">
+                <input type="password" required placeholder="confirm Password" name="confirm_password">
+            </div>
+            <div class="inputbox">
+                <input type="Submit" value="Register">
+            </div>
+        </form>
+        </a>
+   </div>
+ <div class="links">
+        <div class="sign">
+            <a href="/login/">Sign In</a>
+        </div>
+</div>
+</body>
+
+</html>
+
+{% endif %}

@@ -1,0 +1,422 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Redhat.com</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/addtocart.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/checkout.css' %}">
+</head>
+<body>
+    
+    <!-- header section top navigation bar start -->
+    {% include "top-navbar.html" %}
+    <!-- header section top navigation bar end -->
+
+    <div class="container" style="margin-top: 120px; margin-bottom: 20px;">
+        <div class="row">
+            <div class="col-md-8">
+                <h4 style="background-color:blue; color:#fff; padding: 10px 10px; font-size: 20px; margin-bottom:0;">Deliver Address</h4>
+
+                {% if deliver_address or selected_delivery_address %}
+                {% for del_add in deliver_address %}
+                    <div class="row" id="del_add_sel">
+                        <div class="col-md-12">
+                            <div class="card" style="background-color:#fff; margin-bottom:10px;">
+                                <div class="row">
+                                <div class="col-md-12" style="margin-left: 20px;">
+                                    {% comment %} <button type="button" class="edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="float:right; margin-right:50px; margin-top:10px; text-decoration:none; border:none; color:blue;">Edit</button> {% endcomment %}
+                                    <label for="address" style="padding:20px 0;"><span style="font-size:20px; font-weight:500;">{{ del_add.deliver_name }}</span><span id="del_type" style="margin-left:10px; font-size: 12px;">{{ del_add.deliver_type }}</span><span style="margin-left:10px; font-size:20px; font-weight:500;">{{ del_add.deliver_mobile_no }}</span><br><span style="font-size:14px;">{{ del_add.deliver_address }}</span>
+                                        <span style="margin-left:10px; font-size:14px;">{{ del_add.deliver_locality }}</span><span style="margin-left:10px; font-size:14px;">{{ del_add.deliver_city }}</span><span style="margin-left:10px; font-size:14px;">{{ del_add.deliver_state }}</span><span style="margin-left:10px; font-size:14px;">{{ del_add.deliver_landmark }}</span>
+                                    </label>
+                                    <input type="hidden" name="did" class="did">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="{% url 'select-deliver-address' del_add.deliver_address_id order_from %}" class="btn btn-danger" style="margin-left: 30px; margin-bottom:10px;">Deliver Here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            
+                <div class="card" style="margin-top: 10px; margin-bottom:10px; padding: 10px; {% if selected_delivery_address %}display:none;{% endif %}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button style="border:none; outline:none; color: blue; margin-left: 40px;" onclick="show_deliver_form()"><i class="fa-solid fa-plus"></i>  Add New Address</button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- update address -->
+                {% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Address</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Name</label>
+                                <input type="text" class="form-control"  id="dname" value="{{ del_add.deliver_name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Mobile No</label>
+                                <input type="text" class="form-control"  id="mobileno" value="{{ del_add.deliver_mobile_no }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Pincode</label>
+                                <input type="text" class="form-control"  id="dname">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Locality</label>
+                                <input type="text" class="form-control"  id="dname">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Address</label>
+                                <textarea class="form-control"  id="message-text"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">City</label>
+                                <input type="text" class="form-control"  id="dname">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">State</label>
+                                <input type="text" class="form-control"  id="dname">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Landmark</label>
+                                <input type="text" class="form-control"  id="dname">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Alternative Mobile No</label>
+                                <input type="text" class="form-control"  id="dname">
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Update</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div> {% endcomment %}
+
+                    <!-- update address end -->
+
+                <form action="{% url 'save-deliver-address' %}" method='post' id="addressform" style="box-shadow: rgba(99, 99, 99, 0.521) 0px 2px 8px 0px; margin-top:0; padding:20px 20px; ">
+                    {% csrf_token %}
+                    <a href="{% url 'getcurrentlocation' order_from %}" class="btn btn-info" style="color:#fff;"><i class="fa-solid fa-location-crosshairs"></i>Use Current Location</a>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <input type="text" name="Dname" id="dname" placeholder="Name" style="width: 100%;" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="tel" name="Dmobile" id="mobileno" placeholder="Mobile No" style="width: 100%;" maxlength="10" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <input type="text" name="Dpincode" id="pincode" placeholder="Pincode" value="{{ user_current_location.zip }}" style="width: 100%;" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="Dlocality" id="locality" placeholder="Locality" style="width: 100%;" required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-12">
+                            <textarea name="Daddress" id="address" placeholder="Address" style="width:100%;" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <input type="text" name="Dcity" id="city" placeholder="City" value="{{ user_current_location.city }}" style="width: 100%;" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="Dstate" id="state" placeholder="State" value="{{ user_current_location.regionName }}" style="width: 100%;" required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <input type="text" name="Dlandmark" id="landmark" placeholder="Landmark" style="width: 100%;" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="Dalternative_mobile" id="alternative_mobile" placeholder="Alternative Mobile No" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <h6 style="margin-bottom: 10px;">Address Type</h6>
+                        <div class="col-md-6">
+                            <input type="radio" name="addresstype" id="homeaddress" value="Home" style="border:none; outline:none;" required>
+                            <label for="homeaddress">Home(All day delivery)</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" name="addresstype" id="workaddress" value="Work" style="border:none; outline:none;" required>
+                            <label for="workaddress">Work(10:00 Am to 6:00 Pm)</label>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <input type="submit" value="Save And Deliver Here" class="btn" style="color:#fff; margin-right: 10px; background-color: orangered; padding: 10px 30px; border:none; outline:none;">
+                            <a onclick="hide_deliver_form()" style="text-decoration: none; color: blue; cursor:pointer;">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+
+                {% if selected_delivery_address %}
+                <div class="card">
+                    <Address style="margin-left:80px; margin-top: 20px;">
+                       <span style="margin-left:-60px; color: darkblue;">Deliver to :  </span><br>  
+                        {{ selected_delivery_address.deliver_name}} ({{ selected_delivery_address.deliver_type }}) <br>
+                        {{ selected_delivery_address.deliver_mobile_no }} <br>
+                        {{ selected_delivery_address.deliver_address }}, {% if selected_delivery_address.deliver_locality == None %}{% else %} {{ selected_delivery_address.deliver_locality }} {% endif %}<br>
+                        {% if selected_delivery_address.deliver_landmark == None %}{% else %}{{ selected_delivery_address.deliver_landmark }}{% endif %} <br>
+                        {{ selected_delivery_address.deliver_city }} <br>
+                        {{ selected_delivery_address.deliver_state }} <br>
+                        {{ selected_delivery_address.deliver_pincode }}
+                    </Address>
+                </div>
+                <!-- cart products start-->
+                <h4 style="background-color:blue; color:#fff; padding: 10px 10px; font-size: 20px; margin-bottom:0;">Order Summary</h4>
+                {% if cart_products|length > 0 %}
+                <div class="products">
+                    {% for car in cart_products %}
+                    <div class="product">
+        
+                        <img src="{{ car.product.product_image_first.url }}" style="width: 250px; height:170px; margin:20px;">
+                        <div class="product-info">
+        
+                            <a href="{% url 'productdetail' car.product.product_slug %}" id="prod_link" style="text-decoration: none;"><h3 class="product-name" style="font-size: 20px; color:blue; text-transform: uppercase; margin-bottom: 0;">{{ car.product.products_name }}</h3></a>
+                            
+                            {% if car.product.product_average == None %}
+                                <br>
+                                <span class="no-reviews" style="margin-top: 0; margin-left: 0;">No reviews</span> <br>
+                            {% else %}
+                                <div class="stars">
+                                    <span class="fa fa-star {% if car.product.product_average > 0 and car.product.product_average < 1 %}fa fa-star-half-stroke checked{% elif car.product.product_average >= 1 %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if car.product.product_average > 1 and car.product.product_average < 2 %}fa fa-star-half-stroke checked{% elif car.product.product_average >= 2 %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if car.product.product_average > 2 and car.product.product_average < 3 %}fa fa-star-half-stroke checked{% elif car.product.product_average >= 3 %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if car.product.product_average > 3 and car.product.product_average < 4 %}fa fa-star-half-stroke checked{% elif car.product.product_average >= 4 %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if car.product.product_average > 4 and car.product.product_average < 5 %}fa fa-star-half-stroke checked{% elif car.product.product_average >= 5 %}checked{% endif %}"></span><br>
+                                    <div style="margin-top: 10px; margin-bottom: 10px;">
+                                        <span class="sr"> {{ car.product.product_average }}<span class="fa fa-star fs"></span></span>
+                                        <span class="review_count"> {{ car.product.no_of_reviews }} reviews </span>
+                                    </div>
+                                </div>
+                            {% endif %}
+    
+                            <span>Quantity :  {{ car.quantity }}</span> 
+                            
+                            <div class="prices" style="position: absolute; top: 2px; right: 2px;">
+                                <h4 class="product-price" style="margin-bottom: 2px; color: darkblue; font-size:18px; position:relative; top: 30px; right: 60px;">Price:  {{ car.product.products_selling_price }}</h4>
+                                <h4 class="product-price" style="margin-bottom: 2px; color: darkblue; font-size:18px; position:relative; top: 40px; right: 60px;">Total:  {{ car.total }}</h4>
+                            </div>
+        
+                            <p class="product-remove">
+        
+                                <a href="{% url 'remove-product' car.product.products_id %}"><ion-icon name="trash" id="rem"></ion-icon></a>
+    
+                            </p>
+        
+                        </div>
+        
+                    </div>
+                    {% endfor %}
+        
+                </div>
+
+                {% comment %} single product {% endcomment %}
+                {% else %}
+                <div class="product">
+        
+                    <img src="{{ cart_products.product_image_first.url }}" style="width: 250px; height:170px; margin:20px;">
+                    <div class="product-info">
+    
+                        <a href="{% url 'productdetail' cart_products.product_slug %}" id="prod_link" style="text-decoration: none;"><h3 class="product-name" style="font-size: 20px; color:blue; text-transform: uppercase; margin-bottom: 0;">{{ cart_products.products_name }}</h3></a>
+                        <p>{{ cart_products.products_title |truncatewords:"5" }}</p>
+                        
+                        {% if cart_products.product_average == None %}
+                            <br>
+                            <span class="no-reviews" style="margin-top: 0; margin-left: 0;">No reviews</span> <br>
+                        {% else %}
+                            <div class="stars">
+                                <span class="fa fa-star {% if cart_products.product_average > 0 and cart_products.product_average < 1 %}fa fa-star-half-stroke checked{% elif cart_products.product_average >= 1 %}checked{% endif %}"></span>
+                                <span class="fa fa-star {% if cart_products.product_average > 1 and cart_products.product_average < 2 %}fa fa-star-half-stroke checked{% elif cart_products.product_average >= 2 %}checked{% endif %}"></span>
+                                <span class="fa fa-star {% if cart_products.product_average > 2 and cart_products.product_average < 3 %}fa fa-star-half-stroke checked{% elif cart_products.product_average >= 3 %}checked{% endif %}"></span>
+                                <span class="fa fa-star {% if cart_products.product_average > 3 and cart_products.product_average < 4 %}fa fa-star-half-stroke checked{% elif cart_products.product_average >= 4 %}checked{% endif %}"></span>
+                                <span class="fa fa-star {% if cart_products.product_average > 4 and cart_products.product_average < 5 %}fa fa-star-half-stroke checked{% elif cart_products.product_average >= 5 %}checked{% endif %}"></span><br>
+                                <div style="margin-top: 10px; margin-bottom: 10px;">
+                                    <span class="sr"> {{ cart_products.product_average }}<span class="fa fa-star fs"></span></span>
+                                    <span class="review_count"> {{ cart_products.no_of_reviews }} reviews </span>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        Quantity <span class="d-flex" style="max-width: 300px">
+                            <a href="{% url 'update-cart' this_product.product.products_id '-' %}" style="text-decoration: none;">
+                                <button class="btn btn-warning px-3 me-2" style="width:40px; height:36px; font-size: 14px; display: flex; justify-content: center; align-items: center;">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </a>
+
+                            <div class="form-outline">
+                                <input id="form1" min="0" name="quantity" value="{{ this_product.quantity }}" type="text" class="form-control" style=" width: 45px; text-align: center;"/>
+                            </div>
+
+                            <a href="{% url 'update-cart' this_product.product.products_id '+' %}" style="text-decoration: none;">
+                                <button class="btn btn-warning px-3 ms-2" style="width:40px; height:36px; font-size: 14px; display: flex; justify-content: center; align-items: center;">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </a>
+                        </span> 
+                        
+                        <div class="prices" style="position: absolute; top: 2px; right: 2px;">
+                            <h4 class="product-price" style="margin-bottom: 2px; color: darkblue; font-size:18px; position:relative; top: 30px; right: 60px;">Price:  {{ cart_products.products_selling_price }}</h4>
+                            <h4 class="product-price" style="margin-bottom: 2px; color: darkblue; font-size:18px; position:relative; top: 40px; right: 60px;">Total:  {{ this_product.total }}</h4>
+                        </div>
+
+                    </div>
+    
+                </div>
+                {% endif %}
+                <button class="btn btn-warning" style="margin-bottom:20px; color:#fff; font-size:20px;" onclick="show_payment_options()">Continue</button>
+
+                <!-- cart products end-->
+                
+                <!-- payment selection strat -->
+
+                <div class="row" id="paymentoptions" hidden=True>
+                    <h4 style="background-color:blue; color:#fff; padding: 10px 10px; font-size: 20px; margin-bottom:0;">Payment Options</h4>
+                    
+                    <div class="card" style="display: inline; padding:20px 20px;">
+                        <form action="/order/{{ order_from }}/{{ delid }}" method="post">   
+                            {% csrf_token %} 
+                            <input type="radio" name="paymentmode" id="cashondelivery" value="cod" style="margin-right: 10px;" onclick="enable()" >
+                            <label for="cashondelivery"><img src="{% static '/images/cashondelivery.png' %}" alt="cash on delivery" style="width:80px; height:50px;"> Cash on Delivery</label>
+                            <br>
+                            <br>
+                            <input type="radio" name="paymentmode" id="paytm" value="paytmmode" style="margin-right: 10px;" onclick="enable()">
+                            <label for="paytm"><img src="{% static '/images/Paytmlogo.jpg' %}" alt="paytm logo" style="width:80px; height:50px;"> Online Payments</label>
+                            <button class="btn btn-primary" id="placeorder" style="font-size:20px; float:right; background-color:darkblue;" disabled>Place Order</button>
+                        </form>
+                    </div>
+                </div>
+                
+
+                <!-- payment selection end -->
+                
+
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <div class="cart-total">
+
+                    <h5 style="color: blue; margin-bottom: 20px;">Price Details</h5>
+    
+                    <p>
+        
+                        <span>Total Price</span>
+        
+                        <span>{{ without_discount_total }}</span>
+        
+                    </p>
+        
+                    <p>
+        
+                        <span>Number of Items</span>
+        
+                        <span>{{ no_of_items }}</span>
+        
+                    </p>
+        
+                    <p>
+        
+                        <span style="color:rgb(12, 182, 12);">Your Savings</span>
+        
+                        <span style="color:rgb(12, 182, 12);">{{ savings }}</span>
+        
+                    </p>
+
+                    <p>
+        
+                        <span style="opacity: 60%;">Amount Payable</span>
+        
+                        <span style="opacity: 60%;">{{ tot }}</span>
+        
+                    </p>
+        
+                </div>
+        
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var addressform = document.getElementById('addressform');
+        var paymentoptions = document.getElementById('paymentoptions');
+        {% if deliver_address or selected_delivery_address %}
+            addressform.style.display = "none";
+        {% endif %}
+
+        {% if user_current_location %}
+            addressform.style.display = "block";
+        {% endif %}
+
+        function show_deliver_form(){
+            addressform.style.display = "block";
+        }
+
+        function hide_deliver_form(){
+            addressform.style.display="none";
+        }
+
+        function show_payment_options(){
+            paymentoptions.hidden= false;
+            paymentoptions.scrollIntoView(top)
+        }
+
+        function enable(){
+            document.getElementById('placeorder').disabled=false;
+        }
+
+    </script>
+
+    {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src = "https://ajax.aspnetCDN.com/ajax/jQuery/jQuery-3.3.1.min.js"></script>
+
+    <script>
+        .$('.edit').on('click', function(){
+            $.ajax({
+                method:"GET",
+                url:"/getadd",
+                success: function(response){
+                    start(response);
+                }
+              });
+        });
+    </script> {% endcomment %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

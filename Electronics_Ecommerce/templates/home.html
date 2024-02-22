@@ -1,0 +1,295 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/product_display.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+  </head>
+
+  <body>
+    <!-- header section top navigation bar start -->
+
+    {% include "top-navbar.html" %}
+
+    <!-- header section top navigation bar end -->
+
+    <!-- image slider start -->
+    <div class="image-slider">
+      <div class="images">
+        <img
+          src="{% static '/images/image-slider/imageslider1.jpg' %}"
+          alt=""
+          id="img1"
+          class="img_tag"
+        />
+        <img
+          src="{% static '/images/image-slider/imageslider2.jpg' %}"
+          alt=""
+          id="img2"
+          class="img_tag"
+        />
+        <img
+          src="{% static '/images/image-slider/imageslider3.jpg' %}"
+          alt=""
+          id="img3"
+          class="img_tag"
+        />
+        <img
+          src="{% static '/images/image-slider/imageslider4.jpg' %}"
+          alt=""
+          id="img4"
+          class="img_tag"
+        />
+      </div>
+
+      <div class="radio-buttons">
+        <span onclick="radio_index(1)" class="span_tag"></span>
+        <span onclick="radio_index(2)" class="span_tag"></span>
+        <span onclick="radio_index(3)" class="span_tag"></span>
+        <span onclick="radio_index(4)" class="span_tag"></span>
+      </div>
+
+      <div class="shift-buttons">
+        <span class="shift_button" id="left" onclick="slide_index(-1)"
+          ><ion-icon name="chevron-back-circle"></ion-icon
+        ></span>
+        <span class="shift_button" id="right" onclick="slide_index(1)"
+          ><ion-icon name="chevron-forward-circle"></ion-icon
+        ></span>
+      </div>
+    </div>
+
+    <!-- image slider end -->
+
+    <!-- products display start -->
+    
+    <div class="containers">
+      {% comment %} {% for cat in category %}
+      {% if cat.product_set.all %}
+      <div class="cathead"><h5>{{ cat.category_name }}</h5></div>
+      {% endif %} {% endcomment %}
+      <div class="row">
+        {% for i in product %}
+          <div class="col-md-3">
+            <a href="{% url 'productdetail' i.product_slug %}">
+              <div class="product_card">
+              <div class="image">
+                <img src="{{ i.product_image_first.url }}" alt="product images" />
+                <button class="addtocarts">
+                  <a href="{% url 'addtocart' i.products_id i.product_slug %}"><ion-icon name="cart"></ion-icon></a>
+                </button>
+                <button class="addtocarts wishlist">
+                  <a href="#"><ion-icon name="heart"></ion-icon></a>
+                </button>
+                <button class="addtocarts wishlist share">
+                  <a href="#"><ion-icon name="share-social"></ion-icon></a>
+                </button>
+                <br>
+                <div class="name">
+                  <h6>{{ i.products_name }}</h6>
+                </div>
+                <div class="title">
+                  <p>{{ i.products_title |slice:38 }}</p>
+                </div>
+                <div class="prices">
+                  <span class="price"><span class="price"></span>{{ i.products_selling_price }}</span>
+                  <span class="selling_price"><span class="selling_price"></span>{{ i.products_price }}</span>
+                  <span class="discount"><img src="{% static 'images/discount.png' %}" alt="">{{ i.product_discount }}<span class="offer">off</span></span>
+                </div>
+                {% if i.product_average == None %}
+                <span class="no-reviews">No reviews</span>
+                {% else %}
+                <div class="stars">
+                  <span class="fa fa-star {% if i.product_average > 0 and i.product_average < 1 %}fa fa-star-half-stroke checked{% elif i.product_average >= 1 %}checked{% endif %}"></span>
+                  <span class="fa fa-star {% if i.product_average > 1 and i.product_average < 2 %}fa fa-star-half-stroke checked{% elif i.product_average >= 2 %}checked{% endif %}"></span>
+                  <span class="fa fa-star {% if i.product_average > 2 and i.product_average < 3 %}fa fa-star-half-stroke checked{% elif i.product_average >= 3 %}checked{% endif %}"></span>
+                  <span class="fa fa-star {% if i.product_average > 3 and i.product_average < 4 %}fa fa-star-half-stroke checked{% elif i.product_average >= 4 %}checked{% endif %}"></span>
+                  <span class="fa fa-star {% if i.product_average > 4 and i.product_average < 5 %}fa fa-star-half-stroke checked{% elif i.product_average >= 5 %}checked{% endif %}"></span>
+                  <span class="sr"> {{ i.product_average }}<span class="fa fa-star fs"></span></span>
+                  <span class="review_count"> {{ i.no_of_reviews }} reviews </span>
+                </div>
+                {% endif %}
+                <div class="free_delivery">
+                  <span> {% if i.free_delivery %} Free Delivery {% else %} Delivery &#x20b9 60 {% endif %}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          </div>
+        {% endfor %}
+      </div>
+      {% comment %} {% endfor %} {% endcomment %}
+    </div>
+
+    <!-- products display end -->
+
+    <section class="categories">
+      <div class="container">
+          <div class="row">
+              <div class="categories__slider owl-carousel">
+                  {% for i in product %}
+                  <div class="col-lg-3">
+                      <div class="categories__item set-bg" data-setbg="">
+                        <a href="{% url 'productdetail' i.product_slug %}">
+                          <div class="product_card">
+                          <div class="image">
+                            <img src="{{ i.product_image_first.url }}" alt="product images" />
+                            <button class="addtocarts">
+                              <a href="{% url 'addtocart' i.products_id i.product_slug %}"><ion-icon name="cart"></ion-icon></a>
+                            </button>
+                            <button class="addtocarts wishlist">
+                              <a href="#"><ion-icon name="heart"></ion-icon></a>
+                            </button>
+                            <button class="addtocarts wishlist share">
+                              <a href="#"><ion-icon name="share-social"></ion-icon></a>
+                            </button>
+                            <br>
+                            <div class="name">
+                              <h6>{{ i.products_name }}</h6>
+                            </div>
+                            <div class="title">
+                              <p>{{ i.products_title |slice:38 }}</p>
+                            </div>
+                            <div class="prices">
+                              <span class="price"><span class="price"></span>{{ i.products_selling_price }}</span>
+                              <span class="selling_price"><span class="selling_price"></span>{{ i.products_price }}</span>
+                              <span class="discount"><img src="{% static 'images/discount.png' %}" alt="">{{ i.product_discount }}<span class="offer">off</span></span>
+                            </div>
+                            {% if i.product_average == None %}
+                            <span class="no-reviews">No reviews</span>
+                            {% else %}
+                            <div class="stars">
+                              <span class="fa fa-star {% if i.product_average > 0 and i.product_average < 1 %}fa fa-star-half-stroke checked{% elif i.product_average >= 1 %}checked{% endif %}"></span>
+                              <span class="fa fa-star {% if i.product_average > 1 and i.product_average < 2 %}fa fa-star-half-stroke checked{% elif i.product_average >= 2 %}checked{% endif %}"></span>
+                              <span class="fa fa-star {% if i.product_average > 2 and i.product_average < 3 %}fa fa-star-half-stroke checked{% elif i.product_average >= 3 %}checked{% endif %}"></span>
+                              <span class="fa fa-star {% if i.product_average > 3 and i.product_average < 4 %}fa fa-star-half-stroke checked{% elif i.product_average >= 4 %}checked{% endif %}"></span>
+                              <span class="fa fa-star {% if i.product_average > 4 and i.product_average < 5 %}fa fa-star-half-stroke checked{% elif i.product_average >= 5 %}checked{% endif %}"></span>
+                              <span class="sr"> {{ i.product_average }}<span class="fa fa-star fs"></span></span>
+                              <span class="review_count"> {{ i.no_of_reviews }} reviews </span>
+                            </div>
+                            {% endif %}
+                            <div class="free_delivery">
+                              <span> {% if i.free_delivery %} Free Delivery {% else %} Delivery &#x20b9 60 {% endif %}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+  </section>
+
+    <!-- image slider js start -->
+
+    <script>
+      var index_value = 0;
+
+      showimage(index_value);
+
+      function radio_index(i_v) {
+        index_value = i_v;
+        click_show_image(index_value);
+      }
+
+      function slide_index(i_v) {
+        const img = document.getElementsByClassName("img_tag");
+        const span = document.getElementsByClassName("span_tag");
+
+        for (let i = 0; i < img.length; i++) {
+          img[i].style.display = "none";
+          span[i].style.background = "transparent";
+        }
+        if (i_v == 1) {
+          if (index_value >= img.length - 1) {
+            index_value = -1;
+          }
+          img[(index_value += 1)].style.display = "block";
+          span[index_value].style.background = "#6b6666aa";
+        }
+
+        if (i_v == -1) {
+          if (index_value <= 0) {
+            index_value = img.length;
+          }
+          img[(index_value -= 1)].style.display = "block";
+          span[index_value].style.background = "#6b6666aa";
+        }
+      }
+
+      function showimage(i_v) {
+        const img = document.getElementsByClassName("img_tag");
+        const span = document.getElementsByClassName("span_tag");
+
+        for (let i = 0; i < img.length; i++) {
+          img[i].style.display = "none";
+          span[i].style.background = "transparent";
+        }
+        img[index_value].style.display = "block";
+        span[index_value].style.background = "#6b6666aa";
+
+        let t = setTimeout(() => {
+          if (index_value >= img.length - 1) {
+            index_value = 0;
+          } else {
+            index_value += 1;
+          }
+          showimage(index_value);
+        }, 2000);
+      }
+
+      function click_show_image(i_v) {
+        const img = document.getElementsByClassName("img_tag");
+        const span = document.getElementsByClassName("span_tag");
+
+        for (let i = 0; i < img.length; i++) {
+          img[i].style.display = "none";
+          span[i].style.background = "transparent";
+        }
+
+        img[index_value - 1].style.display = "block";
+        span[index_value - 1].style.background = "#6b6666aa";
+      }
+    </script>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- image slider js end -->
+
+    <!-- footer start -->
+
+    {% include 'footer.html' %}
+
+    <!-- footer end -->
+  </body>
+</html>

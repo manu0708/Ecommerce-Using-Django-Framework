@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce</title>
+    <link rel="stylesheet" href="{% static '/css/top-navbar.css' %}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+
+    <style>
+        #ui-id-1{
+            z-index:999;!important
+        }
+
+        #ui-id-1 .ui-menu-item{
+            font-size: 18px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header id="top_nav">
+        <a href="/" id="logo"><img src="{% static '/images/logo (2).png' %}" alt=""></a>
+        <div class="headernav">
+            <ul id="subnavbar">
+
+                <section class="main">
+                    <form class="search" method="get" action="{% url 'searchproductpage' %}" >
+                        <input type="search" name="q" id="tags" placeholder="Search..." autocomplete="off" onfocusout="hide_searchbar()" />
+                    </form>
+               </section>
+
+                <li class="main_nav_link">
+                    <a href="/" class="nav_item {% if link == 'home' %}active{% endif %}">Home</a>
+                </li>
+
+                <li class="main_nav_link">
+                    <a href="/myorders/" class="nav_item {% if link == 'order' %}active{% endif %}">Orders</a>
+                </li>
+
+                <li class="main_nav_link">
+                    <a href="/contact-us/" class="nav_item {% if link == 'contact' %}active{% endif %}">Contact Us</a>
+                </li>
+
+                <li class="main_nav_link">
+                    <a href="/about-us/" class="nav_item {% if link == 'about' %}active{% endif %}">About Us</a>
+                </li>
+                
+                <li class="main_nav_link {% if link == 'cart' %}active{% endif %}" id="cart">
+                    <a href="/cart/"><i class="fa-solid fa-cart-shopping fa-bounce" id="cartlogo"></i> {% if user.is_authenticated %} <span>{{ no_of_carts }}</span> {% endif %}</a>
+                </li>
+
+                <li class="user_profile main_nav_link" onclick="show_profile()" style="background-size:100%; {% if user_avater.user_avatar %}background-image: url({{ user_avater.user_avatar.url }});{% else %}background-image: url({% static '/images/default_user_profile.png' %});{% endif %}">
+                    <ul class="dropdown" id="u_p">
+                        {% if user.is_authenticated %}
+                            <li id="hellouser"><img src="{% if user_avater.user_avatar %}{{ user_avater.user_avatar.url }}{% else %}{% static '/images/default_user_profile.png' %}{% endif %}" alt="" style="width:40px; height:40px; border-radius: 50%;"><a href="" style="color: darkorchid;">{{ user.username }}</a></li>
+                            <li><i class="fa-solid fa-circle-user" style="font-size:20px;"></i><a href="{% url 'myprofile' %}">My Profile</a><i class="fa-solid fa-angle-right" id="profile_angle"></i></li>
+                            <li><i class="fa-solid fa-heart" style="font-size:18px;"></i><a href="{% url 'displaywishlist' %}">Wishlist</a><i class="fa-solid fa-angle-right" id="profile_angle"></i></li>
+                            {% if request.user.is_superuser %}
+                            <li id="register"><i class="fa-solid fa-shop" style="font-size:16px;"></i><a href="/admin/">Admin Site</a><i class="fa-solid fa-angle-right" id="profile_angle"></i></li>
+                            {% endif %}
+                            <li id="logout"><i class="fa-solid fa-right-from-bracket" style="font-size:18px;"></i><a href="/logout/">Logout</a><i class="fa-solid fa-angle-right" id="profile_angle"></i></li>
+                        {% else %}
+                            <li id="login"><i class="fa-solid fa-right-to-bracket"></i><a href="/login/" id="signup">Login</a><i class="fa-solid fa-angle-right" id="profile_angle"></i></li>
+                            <li id="login"><i class="fa-solid fa-user-plus"></i><a href="login/register/" id="signup">Register</a><i class="fa-solid fa-angle-right" id="profile_angle"></i></li>
+                            <li id="register"><i class="fa-solid fa-shop" style="font-size:16px;"></i><a href="/admin/">Admin Login</a><i class="fa-solid fa-angle-right" id="profile_angle"></i></li>
+                        {% endif %}
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </header>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        {% comment %} 
+        const login = document.getElementById('signup');
+
+        if(window.location.pathname == '/login/register/'){
+            login.innerHTML = 'Register';
+            login.style.color = "greenyellow";
+        }
+        else{
+            login.innerHTML = 'Login';
+
+        } 
+        {% endcomment %}
+
+        function show_profile(){
+            u_p = document.getElementById('u_p');
+            if(u_p.style.display == "none"){
+                u_p.style.display = "block";
+            }
+            else{
+                u_p.style.display = "none";
+            }
+        }
+
+        {% comment %} function show_search(){
+            s = document.getElementById('s');
+
+            s.style.width = "100%";
+            s.style.height = "35px";
+            s.style.bordercolor="#a8acbc #babdcc #c0c3d2";
+            s.focus()
+        }
+
+        function hide_searchbar(){
+            s = document.getElementById('s');
+            s.style.border="none"
+            s.style.width = "0%";
+            s.style.height = "0";
+        } {% endcomment %}
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src = "https://ajax.aspnetCDN.com/ajax/jQuery/jQuery-3.3.1.min.js"></script>
+    <script>
+
+        $( function() {
+          var availableTags = [];
+
+          $.ajax({
+            method:"GET",
+            url:"/getsuggest",
+            success: function(response){
+                start(response);
+            }
+          });
+
+          function start(availableTags){
+                $( "#tags" ).autocomplete({
+                    source: availableTags
+                },{minLength:2});
+            }
+        } );
+    </script>
+
+</body>
+
+</html>

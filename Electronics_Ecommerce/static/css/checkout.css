@@ -1,0 +1,33 @@
+.container .row .col-md-8 #addressform{
+    border-radius: 20px;
+}
+
+.container .row .col-md-8 form .row .col-md-6 input {
+    padding: 10px 10px;
+    outline: 1px solid rgb(72, 137, 175);
+    border: 1px solid #b6b1b1;
+    color: blueviolet;
+    border-radius: 5px;
+}
+
+.container .row .col-md-8 form .row .col-md-6 input::placeholder {
+    font-family: 'kanit';
+}
+
+.container .row .col-md-8 form .row .col-md-12 textarea {
+    padding: 10px 10px;
+    outline: 1px solid rgb(72, 137, 175);
+    border: 1px solid #b6b1b1;
+    color: blueviolet;
+    border-radius: 5px;
+}
+
+.container .row .col-md-8 form .row .col-md-12 textarea::placeholder {
+    font-family: 'kanit';
+}
+
+#del_type {
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    padding: 2px 3px;
+}
+

@@ -1,0 +1,82 @@
+.developer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.profile{
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    transition: 0.4s;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.profile:hover{
+    border-radius: 20px;
+    height: 500px;
+}
+
+.profile img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    z-index: 2;
+    transition: 0.4s;
+    transform: translateZ(50px);
+}
+
+.profile:hover img{
+    border-radius: 20px;
+    margin-top: -230px;
+}
+
+.profile .info{
+    position: absolute;
+    text-align: center;
+    top: 25%;
+    transition: 0.4s;
+    transform: translateZ(50px);
+}
+
+.profile:hover .info{
+    top: 55%;
+}
+
+.profile .info .name{
+    color: #fac031;
+    margin-bottom: 15px;
+    transform: translateZ(50px);
+}
+
+.profile .info .bio{
+    width: 70%;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    transform: translateZ(50px);
+}
+
+.profile .info .team_icon i{
+    margin: 10px 5px 5px 0;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateZ(50px);
+}
+
+.profile .info .team_icon i:hover{
+    color: #fac031;
+}

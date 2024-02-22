@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
+
+    <style>
+        #order_image:hover{
+            transform: scale(1.2);
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+    </style>
+
+</head>
+<body>
+    {% include 'top-navbar.html' %}
+
+    <div class="container" style="margin-top:70px;">
+        <h4 style="color:orangered;">Order Histroy</h4>
+        {% for order in orders %}
+        <a href="{% url 'orderinformation' order.order_id %}">
+            <div class="card" style="margin-top:20px; padding:30px 30px; border:none; background-color:#fff; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; cursor:pointer;">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span id="order_image" style="background-image: url({{ order.ordered_product.product_image_first.url }}); width:80px; height:100px; background-size: 100%; background-repeat:no-repeat; display:block; transition:1s;" onhover="zoom()"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: blue;">{{ order.ordered_product.products_name }}</h5>
+                                <span style="color: orange;">{{ order.ordered_product.products_title }}</span>
+                                <br>
+                                <span style="color:green; font-size:18px;">{{ order.amount }}</span>
+                            </div>
+                            <div class="col-md-3" style="display:flex; justify-content: center; align-items:center;">
+                                <h5 style="color:darkviolet;">{{ order.payment_mode }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="display:flex; justify-content: center; align-items:center; flex-direction:column;">
+                        <span style="{% if order.delivery_decription == "Cancleled" %}color:red;{% else %}color:green;{% endif %}"><i class="fa-solid fa-circle fa-beat" style="font-size:10px; margin-right: 10px; border: 1px solid green; padding:5px; border-radius:50%; {% if order.delivery_decription == "Cancleled" %}color:red;{% else %}color:green;{% endif %}"></i>{{ order.delivery_decription }} {{ order.Delivery_expected }}</span>
+                        <span style="opacity:70%;">{{ order.order_status }}</span>
+                    </div>
+                </div>              
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
